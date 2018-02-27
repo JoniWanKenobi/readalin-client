@@ -1,0 +1,62 @@
+.homepage-background {
+  height: 70vh;
+  background-image: url("../../../assets/images/urban-explorer.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  margin-bottom: 7vh;
+  /* opacity: 0.7; */
+}
+
+.box{
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  align-items: flex-end;
+  align-content: stretch;
+  height: 100%;
+  background-color: transparent;
+  border: 0px;
+}
+
+.container{
+  border-width: 0px;
+}
+
+.brand {
+  /* text-align: center; */
+  font-size: 5em;
+  color: rgb(66, 60, 60);
+}
+
+.catch-box{
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-around;
+  align-items: center;
+  align-content: stretch;
+  height: 100%;
+  background-color: transparent;
+  border-width: 0px;
+}
+
+.homepage-btn{
+  width: 30vw;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+  height: 100%;
+  background-color: transparent;
+}
+
+.homepage-catch{
+  background-color: rgb(66, 60, 60);
+  padding: 3vh;
+  border-radius: 5px;
+}
+
+.white-title{
+  color: white;
+}
