@@ -1,0 +1,22 @@
+.homepage-left{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-content: stretch;
+  height: 100%;
+  background-color: transparent;
+  border-width: 0px;
+}
+
+
+
+.homepage-catch{
+  background-color: rgb(66, 60, 60);
+  padding: 3vh;
+  border-radius: 5px;
+}
+
+.white-title{
+  color: white;
+}

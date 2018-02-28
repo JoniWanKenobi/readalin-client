@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
+  homeRight: string = 'start';
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  setHomeRight(val){
+    this.homeRight = val;
   }
 
 }

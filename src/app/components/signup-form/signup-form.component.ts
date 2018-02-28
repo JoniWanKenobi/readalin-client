@@ -1,0 +1,51 @@
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../../services/auth.service';
+
+@Component({
+  selector: 'app-signup-form',
+  templateUrl: './signup-form.component.html',
+  styleUrls: ['./signup-form.component.css']
+})
+export class SignupFormComponent implements OnInit {
+  @Output() showLogin = new EventEmitter<string>();
+
+  username: string;
+  password: string;
+  email: string;
+  error: null;
+
+  feedbackEnabled: boolean = false;
+  processing: boolean = false;
+
+  constructor(private authService: AuthService, private router: Router) { }
+
+  ngOnInit() {
+  }
+
+  showLoginClicked(){
+    this.showLogin.emit('login');
+  }
+
+  signup(form){
+    this.feedbackEnabled = true;
+    if(form.valid){
+      this.processing = true;
+      const newUser = {username: this.username, email: this.email, password: this.password};
+      this.authService.signup(newUser)
+        .then((response) => {
+          this.processing = false;
+          this.router.navigate(['books']);
+        })
+        .catch((err) => {
+          this.error = err.error.error;
+          this.processing = false;
+        })
+      this.feedbackEnabled = false;
+    }
+  }
+
+
+}
+
