@@ -1,24 +1,26 @@
 <form (ngSubmit) = "signup(form)" #form = "ngForm" class="login-form" novalidate>  
   <div class="notification is-danger" [ngSwitch]="error" *ngIf="error">
-    <div *ngSwitchCase="'username-not-unique'">The username is already taken</div>
+    <div *ngSwitchCase="'username-not-unique'">This username is already taken</div>
     <div *ngSwitchDefault>An unexpected error ocurred, please try again</div>
+    <button class="delete is-small" (click) = "disableFeedback()"></button>
   </div>
   <div *ngIf="feedbackEnabled && form.invalid" class="notification is-danger">
-      <!-- <p class="validation">there are errors in the form, please review the fields</p> -->
-      <div *ngIf="usernameField.errors">
-        <p *ngIf="usernameField.errors.required" class="validation">
-          username required
-        </p>
-      </div>
-      <div *ngIf="emailField.errors">
-        <p *ngIf="emailField.errors.required" class="validation">
-          email required
-        </p>
-      </div>
-      <div *ngIf="passwordField.errors">
-        <p *ngIf="passwordField.errors.required" class="validation">password required</p>
-      </div>
+    <!-- <p class="validation">there are errors in the form, please review the fields</p> -->
+    <div *ngIf="usernameField.errors">
+      <p *ngIf="usernameField.errors.required" class="validation">
+        username required
+      </p>
     </div>
+    <div *ngIf="emailField.errors">
+      <p *ngIf="emailField.errors.required" class="validation">
+        email required
+      </p>
+    </div>
+    <div *ngIf="passwordField.errors">
+      <p *ngIf="passwordField.errors.required" class="validation">password required</p>
+    </div>
+    <button class="delete is-small" (click) = "disableFeedback()"></button>
+  </div>
   <div class="field">
     <div class="control has-icons-left has-icons-right">
       <input class="input" type="text" name="username" [disabled]="processing" placeholder="Username" [(ngModel)]="username" #usernameField="ngModel" required>
@@ -28,7 +30,7 @@
     </div>
   </div>
   <div class="field">
-    <div class="control has-icons-left has-icons-right">
+    <div class="control has-icons-left">
       <input class="input" type="email" name="email" [disabled]="processing" placeholder="Email" [(ngModel)]="email" #emailField="ngModel" required>
       <span class="icon is-small is-left">
           <i class="fas fa-envelope"></i>
@@ -37,7 +39,7 @@
   </div>
   <div class="field">
     <div class="control has-icons-left">
-      <input class="input" type="password" [disabled]="processing" placeholder="Password" name="password" placeholder="password" [(ngModel)]="password" #passwordField="ngModel" required>
+      <input class="input" type="password" [disabled]="processing" placeholder="Password" name="password" [(ngModel)]="password" #passwordField="ngModel" required>
       <span class="icon is-small is-left">
         <i class="fas fa-lock"></i>
       </span>      

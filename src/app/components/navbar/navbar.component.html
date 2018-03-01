@@ -1,0 +1,28 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <div class="navbar-item">
+      <p class="title">Readalin</p>
+    </div>
+    <div class="navbar-burger">
+        <p>{{user.username}}</p>        
+        <button class="button" (click) = "logout()">          
+            <i class="fas fa-sign-out-alt"></i>          
+        </button>
+    </div>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-end">
+      <div class="navbar-item has-icons-left">
+          <!-- <i class="fas fa-user"></i> -->
+        <p><strong> {{user.username}}</strong></p>
+      </div>
+      <div class="navbar-item">
+        <button class="button is-dark is-outlined" (click) = "logout()">
+            <span class="icon is-small">
+                <i class="fas fa-sign-out-alt"></i>
+            </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

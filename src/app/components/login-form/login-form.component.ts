@@ -27,8 +27,14 @@ export class LoginFormComponent implements OnInit {
     this.showSignup.emit('signup');
   }
 
+  disableFeedback(){
+    this.feedbackEnabled = false;
+    this.error = null;
+  }
+
   login(form){
     this.feedbackEnabled = true;
+    this.error = null;
     if(form.valid){
       this.processing = true;
       const user = {username: this.username, password: this.password};

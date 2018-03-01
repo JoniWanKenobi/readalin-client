@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { RequireAnonGuardService } from './services/require-anon-guard.service';
 import { RequireUserGuardService } from './services/require-user-guard.service';
+import { BooksService } from './services/books.service';
 
 
 import { AppComponent } from './app.component';
@@ -19,6 +20,11 @@ import { HomepageRightComponent } from './components/homepage-right/homepage-rig
 import { HomepageFeaturesComponent } from './components/homepage-features/homepage-features.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
+import { BookComponent } from './components/book/book.component';
+import { BooksListComponent } from './components/books-list/books-list.component';
+import { SearchComponent } from './components/search/search.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -35,7 +41,12 @@ const routes: Routes = [
     HomepageRightComponent,
     HomepageFeaturesComponent,
     LoginFormComponent,
-    SignupFormComponent
+    SignupFormComponent,
+    BookComponent,
+    BooksListComponent,
+    SearchComponent,
+    FileUploadComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +54,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [AuthService, RequireAnonGuardService, RequireUserGuardService],
+  providers: [AuthService, RequireAnonGuardService, RequireUserGuardService, BooksService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

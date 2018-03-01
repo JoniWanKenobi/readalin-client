@@ -28,8 +28,14 @@ export class SignupFormComponent implements OnInit {
     this.showLogin.emit('login');
   }
 
+  disableFeedback(){
+    this.feedbackEnabled = false;
+    this.error = null;
+  }
+
   signup(form){
     this.feedbackEnabled = true;
+    this.error = null;
     if(form.valid){
       this.processing = true;
       const newUser = {username: this.username, email: this.email, password: this.password};
