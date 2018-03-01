@@ -2,18 +2,23 @@
 <app-navbar [user] = "user" (doLogout) = "logout($event)"></app-navbar>
 
 <!-- header -->
+<input type="file" id="file-input" name= "file-input" #fileInput>
+<button type="button" (click)="upload()">Upload</button>
 <nav class="panel">
   <p class="panel-heading">
     Documents
   </p>
   <div class="panel-block">
     <p class="control has-icons-left">
+      
       <!-- search bar -->
       <app-search (searchingFor) = "filterBooks($event)"></app-search>
     </p>
+
     <!-- file upload -->
     <app-file-upload></app-file-upload>
   </div>  
+
   <!-- book list -->
   <div *ngIf = "loading">Retrieving your documents...</div>
   <app-books-list *ngIf = "!loading" [books]="filteredBooks"></app-books-list>         

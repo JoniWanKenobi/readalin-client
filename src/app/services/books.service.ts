@@ -17,29 +17,7 @@ export class BooksService {
   books: Object[];
 
   constructor(private httpClient: HttpClient) { 
-
-    this.books = [
-      {
-        title: 'The hedonistic imperative',
-        author: 'David Pierce'
-      },
-      {
-        title: 'The evolution of human feelings',
-        author: 'Jonathan Mills'
-      },
-      {
-        title: 'All you need to know about numbers',
-        author: 'Francis Bacon'
-      },
-      {
-        title: 'Javascript for dummies',
-        author: 'Andre Torval'
-      },
-      {
-        title: 'The bilble',
-        author: 'God'
-      }
-    ]
+    
 
   }
 
@@ -53,7 +31,7 @@ export class BooksService {
     const options = {
       withCredentials: true
     };
-    return this.httpClient.get(`${this.API_URL}/books`, options)
+    return this.httpClient.get(`${this.API_URL}`, options)
       .toPromise()
       .then((books) => this.setBooks(books))
       .catch((err) => {
@@ -61,6 +39,19 @@ export class BooksService {
           this.setBooks();
         }
       });
+  }
+
+  postBook(book){
+    const options = {
+      withCredentials: true
+    }
+    
+    console.log('book', book);
+    console.log('book.uploadedFile ', book.uploadedFile);
+
+    return this.httpClient.post(`${this.API_URL}`, book, options)
+      .toPromise()
+      .then(()=>this.getRemoteBooks());
   }
 
   getBooks(){
