@@ -40,9 +40,9 @@ export class SignupFormComponent implements OnInit {
       this.processing = true;
       const newUser = {username: this.username, email: this.email, password: this.password};
       this.authService.signup(newUser)
-        .then((response) => {
+        .then((usr) => {
           this.processing = false;
-          this.router.navigate(['books']);
+          this.router.navigate(['books', usr._id]);
         })
         .catch((err) => {
           this.error = err.error.error;

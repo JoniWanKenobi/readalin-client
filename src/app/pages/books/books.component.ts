@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 import { BooksService } from '../../services/books.service';
@@ -16,15 +16,20 @@ export class BooksComponent implements OnInit {
   books: Object[];
   filteredBooks: Object[];  
   user: Object;
+  userId: string;
   loading: boolean = true;
 
   constructor(private authService: AuthService,
               private router: Router,
+              private route: ActivatedRoute,
               private booksService: BooksService) { }
 
   ngOnInit() {
 
-    this.booksService.getRemoteBooks()
+    this.route.params
+      .subscribe((params) => this.userId = params['id']);
+
+    this.booksService.getRemoteBooks(this.userId)
       .then((books) => {
         this.loading = false;
         this.books = books;
@@ -47,8 +52,9 @@ export class BooksComponent implements OnInit {
     let inputEl: HTMLInputElement = document.querySelector('#file-input');
     if(inputEl.files && inputEl.files[0]){
       const formData = new FormData();
-      formData.append('uploadedFile', inputEl.files[0]);      
-      this.booksService.postBook(formData)
+      formData.append('uploadedFile', inputEl.files[0]);  
+      console.log('user: ', this.user);    
+      this.booksService.postBook(this.userId, formData)
         // .then((res) => console.log(res.text))
     }
   }
@@ -63,7 +69,7 @@ export class BooksComponent implements OnInit {
       this.filteredBooks = this.books;
     } else {
       this.filteredBooks = this.books.filter((book) => {
-        return book.originalName.includes(term) || this.isInCategories(book, term); 
+        return book.originalName.toLowerCase().includes(term.toLowerCase()) || this.isInCategories(book, term); 
       });
     }
   }
@@ -71,7 +77,7 @@ export class BooksComponent implements OnInit {
   isInCategories(book, term){
     let isInThere = false;
     book.data.categories.forEach((cat)=>{
-      if(cat.includes(term)){
+      if(cat.name.toLowerCase().includes(term.toLowerCase()){
         isInThere = true;
       }
     });

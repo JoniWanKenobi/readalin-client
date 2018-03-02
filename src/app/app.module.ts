@@ -25,11 +25,13 @@ import { BooksListComponent } from './components/books-list/books-list.component
 import { SearchComponent } from './components/search/search.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { BookPageComponent } from './pages/book-page/book-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home',  component: HomepageComponent, canActivate: [ RequireAnonGuardService ] },
-  { path: 'books', component: BooksComponent, canActivate: [RequireUserGuardService] }
+  { path: 'books/:id', component: BooksComponent, canActivate: [RequireUserGuardService] },
+  { path: 'book/:id', component: BooksComponent, canActivate: [RequireUserGuardService] }
 ];
 
 @NgModule({
@@ -46,7 +48,8 @@ const routes: Routes = [
     BooksListComponent,
     SearchComponent,
     FileUploadComponent,
-    NavbarComponent
+    NavbarComponent,
+    BookPageComponent
   ],
   imports: [
     BrowserModule,

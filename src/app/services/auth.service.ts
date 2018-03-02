@@ -53,7 +53,7 @@ export class AuthService {
     };
     return this.httpClient.post(`${this.API_URL}/signup`, user, options)
       .toPromise()
-      .then((data) => this.setUser(data));
+      .then((newUser) => this.setUser(newUser));
   }
 
   logout(): Promise<any> {

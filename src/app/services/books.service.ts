@@ -27,11 +27,11 @@ export class BooksService {
     return books;
   }
 
-  getRemoteBooks(): Promise<any> {
+  getRemoteBooks(userId): Promise<any> {
     const options = {
       withCredentials: true
     };
-    return this.httpClient.get(`${this.API_URL}`, options)
+    return this.httpClient.get(`${this.API_URL}/${userId}`, options)
       .toPromise()
       .then((books) => this.setBooks(books))
       .catch((err) => {
@@ -41,12 +41,12 @@ export class BooksService {
       });
   }
 
-  postBook(book){
+  postBook(userId, book){
     const options = {
       withCredentials: true
     }
 
-    return this.httpClient.post(`${this.API_URL}`, book, options)
+    return this.httpClient.post(`${this.API_URL}/${userId}`, book, options)
       .toPromise()
   }
     

@@ -39,9 +39,9 @@ export class LoginFormComponent implements OnInit {
       this.processing = true;
       const user = {username: this.username, password: this.password};
       this.authService.login(user)
-        .then((response) => {
+        .then((usr) => {
           this.processing = false;
-          this.router.navigate(['books']);
+          this.router.navigate(['books', usr._id]);
         })
         .catch((err) => {
           this.error = err.error.error;
