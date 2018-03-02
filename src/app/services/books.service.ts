@@ -45,17 +45,15 @@ export class BooksService {
     const options = {
       withCredentials: true
     }
-    
-    console.log('book', book);
-    console.log('book.uploadedFile ', book.uploadedFile);
 
     return this.httpClient.post(`${this.API_URL}`, book, options)
       .toPromise()
-      .then(()=>this.getRemoteBooks());
   }
-
-  getBooks(){
-    return this.books;
+    
+    getBooks(){
+      return this.books;
+    }
+    
   }
-
-}
+  
+  // .then(()=>this.getRemoteBooks());

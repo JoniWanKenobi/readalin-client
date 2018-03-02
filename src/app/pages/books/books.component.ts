@@ -45,19 +45,12 @@ export class BooksComponent implements OnInit {
 
   upload(){
     let inputEl: HTMLInputElement = document.querySelector('#file-input');
-    // let fileBrowser = this.fileInput.nativeElement;
     if(inputEl.files && inputEl.files[0]){
       const formData = new FormData();
-      formData.append('uploadedFile', inputEl.files[0]);
-      
-      console.log('formData: ', );
-      console.log('inputEl: ', inputEl);
-      console.log('inputEl.files[0]: ', inputEl.files[0]);
-      console.log('inputEl.files.item(0): ', inputEl.files.item(0))
+      formData.append('uploadedFile', inputEl.files[0]);      
       this.booksService.postBook(formData)
-        .then(() => console.log('okeeey'))
+        // .then((res) => console.log(res.text))
     }
-    // }
   }
 
   logout(){
@@ -70,9 +63,19 @@ export class BooksComponent implements OnInit {
       this.filteredBooks = this.books;
     } else {
       this.filteredBooks = this.books.filter((book) => {
-        return book.title.includes(term) || book.author.includes(term); 
+        return book.originalName.includes(term) || this.isInCategories(book, term); 
       });
     }
+  }
+
+  isInCategories(book, term){
+    let isInThere = false;
+    book.data.categories.forEach((cat)=>{
+      if(cat.includes(term)){
+        isInThere = true;
+      }
+    });
+    return isInThere;
   }
 
 }
