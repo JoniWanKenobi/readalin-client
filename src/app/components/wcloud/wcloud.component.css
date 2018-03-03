@@ -1,0 +1,7 @@
+#wordcloud{
+  display: flex;
+  width: 100vw;
+  
+  /* margin-left: 10vw; */
+  border-radius: 50%;
+}
