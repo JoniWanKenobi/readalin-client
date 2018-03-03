@@ -1,3 +1,21 @@
-<p>
-  book-page works!
-</p>
+<!-- nav -->
+<app-navbar></app-navbar>
+
+<!-- header -->
+<div class="panel">
+  <div class="panel-heading">
+    <a (click) = "goToBooks()">
+      Documents/
+    </a>
+    <p *ngIf = "book">
+      {{book.originalName}}
+    </p>
+  </div>
+  <div class="panel-block">
+    <p class="control has-icons-left">
+      
+      <!-- search bar -->
+      <app-search (searchingFor) = "filterBooks($event)"></app-search>
+    </p>    
+  </div>        
+</div>

@@ -1,8 +1,8 @@
 <!-- nav -->
-<app-navbar [user] = "user" (doLogout) = "logout($event)"></app-navbar>
+<app-navbar></app-navbar>
 
 <!-- header -->
-<nav class="panel">
+<div class="panel">
   <p class="panel-heading">
     Documents
   </p>
@@ -32,5 +32,5 @@
 
   <!-- book list -->
   <div *ngIf = "loading">Retrieving your documents...</div>
-  <app-books-list *ngIf = "!loading" [books]="filteredBooks"></app-books-list>         
-</nav>
+  <app-books-list *ngIf = "!loading" [books]="filteredBooks" ></app-books-list>         
+</div>

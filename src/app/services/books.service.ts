@@ -15,6 +15,9 @@ export class BooksService {
   booksChange$: Observable<any> = this.booksChange.asObservable();
 
   books: Object[];
+  book: Object;
+
+  
 
   constructor(private httpClient: HttpClient) { 
     
@@ -31,7 +34,7 @@ export class BooksService {
     const options = {
       withCredentials: true
     };
-    return this.httpClient.get(`${this.API_URL}/${userId}`, options)
+    return this.httpClient.get(`${this.API_URL}/all/${userId}`, options)
       .toPromise()
       .then((books) => this.setBooks(books))
       .catch((err) => {
@@ -46,14 +49,37 @@ export class BooksService {
       withCredentials: true
     }
 
-    return this.httpClient.post(`${this.API_URL}/${userId}`, book, options)
+    return this.httpClient.post(`${this.API_URL}/book/${userId}`, book, options)
       .toPromise()
   }
     
-    getBooks(){
-      return this.books;
-    }
+  getBooks(){
+    return this.books;
+  }
+
+  getOneBook(bookId): Promise<any> {
+    const options = {
+      withCredentials: true
+    };
+    return this.httpClient.get(`${this.API_URL}/book/${bookId}`, options)
+      .toPromise()
+      .then((book) => this.setBook(book))
+      .catch((err) => {
+        if (err.status === 404) {
+          this.setBook();
+        }
+      });
+  }
+
+  private setBook(book?: any) {
+    this.book = book;    
+    return book;
+  }
+
+  
+
+
     
   }
   
-  // .then(()=>this.getRemoteBooks());
+  

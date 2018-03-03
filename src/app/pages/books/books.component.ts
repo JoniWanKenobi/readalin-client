@@ -77,7 +77,7 @@ export class BooksComponent implements OnInit {
   isInCategories(book, term){
     let isInThere = false;
     book.data.categories.forEach((cat)=>{
-      if(cat.name.toLowerCase().includes(term.toLowerCase()){
+      if(cat.name.toLowerCase().includes(term.toLowerCase())){
         isInThere = true;
       }
     });

@@ -1,9 +1,9 @@
-
-
+<div class="panel-block" (click) = "goToBookPage(book._id)">
   <div>
     <p class="title is-6">{{book.originalName}}</p> 
     <p *ngFor = "let category of book.data.categories">
       <span  class="tag is-danger">{{category.name}}</span>
     </p>
-  </div>     
-  
+  </div>
+</div>     
+

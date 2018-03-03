@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home',  component: HomepageComponent, canActivate: [ RequireAnonGuardService ] },
   { path: 'books/:id', component: BooksComponent, canActivate: [RequireUserGuardService] },
-  { path: 'book/:id', component: BooksComponent, canActivate: [RequireUserGuardService] }
+  { path: 'book/:id', component: BookPageComponent, canActivate: [RequireUserGuardService] }
 ];
 
 @NgModule({

@@ -9,9 +9,11 @@ export class BooksListComponent implements OnInit {
 
   @Input() books: Object[];
 
+
   constructor() { }
 
   ngOnInit() {
   }
+
 
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { BooksService } from '../../services/books.service';
 
 @Component({
   selector: 'app-book',
@@ -8,10 +10,16 @@ import { Component, OnInit, Input } from '@angular/core';
 export class BookComponent implements OnInit {
 
   @Input() book: any;
+ 
 
-  constructor() { }
+  constructor(private router: Router, private booksService: BooksService) { }
 
   ngOnInit() {
+  }
+
+  goToBookPage(bookId){
+    
+    this.router.navigate(['/book', bookId]);
   }
 
 }

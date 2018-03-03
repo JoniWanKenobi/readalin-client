@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,16 +8,18 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  @Input() user: Object;
+  user: Object;
 
-  @Output() doLogout = new EventEmitter<any>();
-  constructor() { }
+  
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+    this.user = this.authService.getUser();
   }
 
   logout(){
-    this.doLogout.emit();
+    this.authService.logout()
+      .then(() => this.router.navigate(['home']))
   }
 
 }
