@@ -26,6 +26,7 @@ import { SearchComponent } from './components/search/search.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BookPageComponent } from './pages/book-page/book-page.component';
+import { WcloudComponent } from './components/wcloud/wcloud.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -49,7 +50,8 @@ const routes: Routes = [
     SearchComponent,
     FileUploadComponent,
     NavbarComponent,
-    BookPageComponent
+    BookPageComponent,
+    WcloudComponent
   ],
   imports: [
     BrowserModule,
