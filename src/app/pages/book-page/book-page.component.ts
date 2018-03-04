@@ -44,12 +44,10 @@ export class BookPageComponent implements OnInit {
 
   goToBooks(userId){
     this.router.navigate(['books', this.user._id])
-  }
-
-  
+  }  
 
   getTypes(entities: Object[]){    
-    return entities.reduce((acc, val) => {
+    return entities.reduce((acc: Array<any>, val: Object) => {
       if(acc.indexOf(val.type) === -1){
         acc.push(val.type);
       }
@@ -65,5 +63,8 @@ export class BookPageComponent implements OnInit {
     }
   }
 
+  filterWordCloud(cat){    
+    this.router.navigate(['flyover'], { relativeTo: this.route, queryParams: { filter: [cat] }});
+  }
 
 }

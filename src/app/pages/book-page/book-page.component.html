@@ -19,7 +19,7 @@
     </p>
     <div class="panel-block justify-center">
       <div class="tags" >
-        <span [class]="tagClass" *ngFor = "let type of types" > {{type}}</span>  
+        <span [class]="tagClass" *ngFor = "let type of types" (click) = "filterWordCloud(type)" > {{type}}</span>  
       </div>
     </div>
     <!-- <div class="panel-block"> -->

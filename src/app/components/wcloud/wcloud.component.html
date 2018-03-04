@@ -1,5 +1,7 @@
+<div *ngIf = "filterParameters">{{filterParameters[0]}}</div>
 <div class="panel-block">
   <!-- <div *ngFor = "let entity of entities">{{entity.name}}</div> -->
-  <div id = "wordcloud"></div>
+  <div *ngIf = "loading">Loading...</div>
+  <div id = "wordcloud"></div>  
 </div>
 
