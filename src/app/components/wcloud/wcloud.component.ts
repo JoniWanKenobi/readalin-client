@@ -1,5 +1,8 @@
 import { Component, OnInit, OnChanges, ViewChild, ElementRef, Input, ViewEncapsulation } from '@angular/core';
 // import * as d3 from 'd3'; this doesn't work because D3>4, should downgrade it
+
+import { BooksService } from '../../services/books.service';
+
 import * as cloud from 'd3-cloud';
 
 // import { cloud } from 'd3-cloud';
@@ -12,8 +15,9 @@ import * as cloud from 'd3-cloud';
   styleUrls: ['./wcloud.component.css']
 })
 export class WcloudComponent implements OnInit {
-  @Input() entities: Object[];
+  // @Input() entities: Object[];
   
+  entities: Object[];
   layout: any;
   words: Array<any>;
   width: number;
@@ -21,14 +25,15 @@ export class WcloudComponent implements OnInit {
   // fontScale: any;
 
 
-  constructor() { }
+  constructor(private booksService: BooksService) { }
 
   ngOnInit() {
+
+    this.entities = this.booksService.book.data.entities.slice(0, 200);
+
     const fill = d3.scale.category20(); 
-    this.words = [
-      "Hello", "world", "normally", "you", "want", "more", "words",
-      "than", "this"];   
-      console.log(this.entities);
+       
+    console.log(this.entities);
     this.width = 700;
     this.height = 500;  
     }
@@ -60,9 +65,9 @@ export class WcloudComponent implements OnInit {
     const height = this.height;
     d3.select("#wordcloud").append("svg")
         .style("width", '100vw')
-        .style("height", '200vh')
+        .style("height", '250vh')
       .append("g")
-        .attr("transform", "translate(" + (1300 / 2) + "," + (1400 / 2) + ")")
+        .attr("transform", "translate(" + (1300 / 2) + "," + (1150 / 2) + ")")
       .selectAll("text")
         .data(words)
       .enter().append("text")

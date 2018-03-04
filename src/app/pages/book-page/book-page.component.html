@@ -1,12 +1,6 @@
 <!-- nav -->
 <app-navbar></app-navbar>
 
-
-
-
-
-
-
 <!-- header -->
 <div *ngIf = "loading">Loading your new reading experience...</div>
 <div *ngIf = "!loading">
@@ -19,14 +13,11 @@
         {{book.originalName}}
       </p>
     </div>
-    <div class="panel-block">
-      <p class="control has-icons-left">      
-        <!-- search bar -->
-        <app-search (searchingFor) = "filterEntities($event)"></app-search>
-        
-      </p>        
-    </div> 
-    <div class="panel-block">
+    <p class="panel-tabs">
+      <a class="is-active"><i class="fab fa-fly fa-2x"></i>Fly over</a>
+      <a>Dive in</a>
+    </p>
+    <div class="panel-block justify-center">
       <div class="tags" >
         <span [class]="tagClass" *ngFor = "let type of types" > {{type}}</span>  
       </div>
@@ -34,6 +25,7 @@
     <!-- <div class="panel-block"> -->
       <!-- types -->
     <!-- </div>   -->
+    <router-outlet></router-outlet>
   </div>
-  <app-wcloud [entities] = "filteredEntities.slice(0, 200)"></app-wcloud>     
+  <!-- <app-wcloud [entities] = "filteredEntities.slice(0, 200)"></app-wcloud>      -->
 </div>

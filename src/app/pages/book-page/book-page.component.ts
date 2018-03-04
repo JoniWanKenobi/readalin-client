@@ -14,7 +14,7 @@ export class BookPageComponent implements OnInit {
   book: Object;
   bookId: any;
   loading: boolean = true;
-  filteredEntities: Object[];
+  entities: Object[];
   types: Array<string>;
   tagClass: string = "tag";
 
@@ -36,8 +36,8 @@ export class BookPageComponent implements OnInit {
       .then((book) => {
         this.loading = false;
         this.book = book;
-        this.filteredEntities = this.book.data.entities;
-        this.types = this.getTypes(this.filteredEntities);
+        this.entities = this.book.data.entities;
+        this.types = this.getTypes(this.entities);
       });
     
   }
@@ -46,16 +46,7 @@ export class BookPageComponent implements OnInit {
     this.router.navigate(['books', this.user._id])
   }
 
-  filterEntities(term){
-    if(term.length < 0){
-      this.filteredEntities = this.book.data.entities;
-    } else {
-      this.filteredEntities = this.book.data.entities.filter((entity) => {
-        return entity.name.toLowerCase().includes(term.toLowerCase()); 
-      });
-    }
-    this.types = this.getTypes(this.filteredEntities);
-  }
+  
 
   getTypes(entities: Object[]){    
     return entities.reduce((acc, val) => {
