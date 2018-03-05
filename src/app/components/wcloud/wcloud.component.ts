@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, ViewChild, ElementRef, Input, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-// import * as d3 from 'd3'; this doesn't work because D3>4, should downgrade it
+import * as d3 from 'd3'; this //doesn't work because D3>4, should downgrade it
 
 import { BooksService } from '../../services/books.service';
 
@@ -16,11 +16,11 @@ import * as cloud from 'd3-cloud';
 export class WcloudComponent implements OnInit {
   
 
-  @Input() filterParameters: Array<string>;
+  @Input() filterParameters: any;
   
-  entities: Object[];
+  entities: any;
   layout: any;
-  words: Array<any>;
+  words: any;
   width: number;
   height: number;
   // fontScale: any;
@@ -41,7 +41,9 @@ export class WcloudComponent implements OnInit {
         this.filterParameters = queryParams['filter'];
     });
 
-    this.entities = this.booksService.book.data.entities.slice(0, 200); //get entities from the books service
+    const book: any = this.booksService.book;
+
+    this.entities = book.data.entities.slice(0, 200); //get entities from the books service
     this.entities = this.filterEntities(this.filterParameters, this.entities); // filter the entities by category
 
     const fill = d3.scale.category20(); 
@@ -103,7 +105,7 @@ export class WcloudComponent implements OnInit {
   filterEntities(filterArr: Array<string>, arrToBeFiltered: Object[]): Object[]{
   
     if(filterArr){
-      return arrToBeFiltered.filter((obj) => {
+      return arrToBeFiltered.filter((obj: any) => {
         return filterArr.indexOf(obj.type) >= 0;
       });
     } else {

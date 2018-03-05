@@ -49,7 +49,8 @@ export class BooksComponent implements OnInit {
   }
 
   upload(){
-    let inputEl: HTMLInputElement = document.querySelector('#file-input');
+    // let inputEl: HTMLInputElement = document.querySelector('#file-input');
+    let inputEl: any = document.querySelector('#file-input');
     if(inputEl.files && inputEl.files[0]){
       const formData = new FormData();
       formData.append('uploadedFile', inputEl.files[0]);  
@@ -68,7 +69,7 @@ export class BooksComponent implements OnInit {
     if(term.length < 0){
       this.filteredBooks = this.books;
     } else {
-      this.filteredBooks = this.books.filter((book) => {
+      this.filteredBooks = this.books.filter((book: any) => {
         return book.originalName.toLowerCase().includes(term.toLowerCase()) || this.isInCategories(book, term); 
       });
     }

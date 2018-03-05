@@ -11,11 +11,11 @@ import { AuthService } from '../../services/auth.service';
 export class BookPageComponent implements OnInit {
 
   user: any;
-  book: Object;
+  book: any;
   bookId: any;
   loading: boolean = true;
   entities: Object[];
-  types: Array<string>;
+  types: any;
   tagClass: string = "tag can-click";
 
   constructor(
@@ -33,7 +33,7 @@ export class BookPageComponent implements OnInit {
     this.user = this.authService.getUser();
 
     this.booksService.getOneBook(this.bookId)
-      .then((book) => {
+      .then((book: any) => {
         this.loading = false;
         this.book = book;
         this.entities = this.book.data.entities;
@@ -47,7 +47,7 @@ export class BookPageComponent implements OnInit {
   }  
 
   getTypes(entities: Object[]){    
-    return entities.reduce((acc: Array<any>, val: Object) => {
+    return entities.reduce((acc: Array<any>, val: any) => {
       if(acc.indexOf(val.type) === -1){
         acc.push(val.type);
       }

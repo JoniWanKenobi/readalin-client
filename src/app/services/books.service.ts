@@ -4,13 +4,16 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/toPromise';
 
+
+import { environment } from '../../environments/environment';
+
 @Injectable()
 export class BooksService {
 
   
   private booksChange: Subject<any> = new Subject();
 
-  private API_URL = 'http://localhost:3000/books';
+  private API_URL = environment.apiUrl + '/books';
 
   booksChange$: Observable<any> = this.booksChange.asObservable();
 
