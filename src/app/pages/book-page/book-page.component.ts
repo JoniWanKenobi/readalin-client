@@ -16,7 +16,7 @@ export class BookPageComponent implements OnInit {
   loading: boolean = true;
   entities: Object[];
   types: Array<string>;
-  tagClass: string = "tag";
+  tagClass: string = "tag can-click";
 
   constructor(
     private router: Router,
@@ -52,18 +52,19 @@ export class BookPageComponent implements OnInit {
         acc.push(val.type);
       }
       return acc;
-    }, []);   
+    }, ['ALL']);   
   }
 
   tagClicked(){
     if(this.tagClass === "tag is-danger"){
-      this.tagClass = "tag"
+      this.tagClass = "tag can-click"
     } else {
-      this.tagClass = "tag is-danger"
+      this.tagClass = "tag can-click is-danger"
     }
   }
 
   filterWordCloud(cat){    
+    
     this.router.navigate(['flyover'], { relativeTo: this.route, queryParams: { filter: [cat] }});
   }
 

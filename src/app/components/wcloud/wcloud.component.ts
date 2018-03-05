@@ -6,9 +6,7 @@ import { BooksService } from '../../services/books.service';
 
 import * as cloud from 'd3-cloud';
 
-// import { cloud } from 'd3-cloud';
 
-// import * as canvas from 'canvas';
 
 @Component({
   selector: 'app-wcloud',
@@ -16,7 +14,7 @@ import * as cloud from 'd3-cloud';
   styleUrls: ['./wcloud.component.css']
 })
 export class WcloudComponent implements OnInit {
-  // @Input() entities: Object[];
+  
 
   @Input() filterParameters: Array<string>;
   
@@ -28,20 +26,23 @@ export class WcloudComponent implements OnInit {
   // fontScale: any;
   loading = true;
 
-
-  constructor(private booksService: BooksService, private route: ActivatedRoute, private router: Router) { }
-
+  
+  constructor(private booksService: BooksService, 
+              private route: ActivatedRoute, 
+              private router: Router) { 
+              
+              }
+  
   ngOnInit() {
-
     
-    this.route.queryParams
+    
+    this.route.queryParams //grab the filters parameters in the url
       .subscribe((queryParams) => {
         this.filterParameters = queryParams['filter'];
     });
 
-    this.entities = this.booksService.book.data.entities.slice(0, 200);
-
-    this.entities = this.filterEntities(this.filterParameters, this.entities);
+    this.entities = this.booksService.book.data.entities.slice(0, 200); //get entities from the books service
+    this.entities = this.filterEntities(this.filterParameters, this.entities); // filter the entities by category
 
     const fill = d3.scale.category20(); 
        
@@ -59,7 +60,6 @@ export class WcloudComponent implements OnInit {
           return {text: d.name, size: 10 + d.salience * 4000, score: d.sentiment.score, test: "haha"};
         }))
         .padding(0)
-        // .rotate(function() { return ~~(Math.random() * 2) * 90; })
         .font("Impact")
         .fontSize(function(d) { return d.size; })
         .on("end", this.draw);
@@ -68,6 +68,7 @@ export class WcloudComponent implements OnInit {
   }
     
   ngAfterViewInit(){
+    console.log('view init');
       // document.body.querySelector('svg').remove();
   }
 
@@ -75,8 +76,6 @@ export class WcloudComponent implements OnInit {
     const self = this;
     const width = this.width;
     const height = this.height;
-    const drawingEl = document.querySelector(".drawing")
-    if(drawingEl){drawingEl.remove()};
     d3.select("#wordcloud").append("svg")
     .style("width", '100vw')
     .style("height", '250vh')
@@ -87,7 +86,7 @@ export class WcloudComponent implements OnInit {
     .data(words)
     .enter().append("text")
     .style("font-size", function(d) { return d.size + "px"; })
-    .style("font-family", "Impact")
+    .style("font-family", "BlinkMacSystemFont")
     .style("fill", ((d)=>{
       if(d.score > 0) { return 'green' }
       else if(d.score < 0){ return 'red' }
@@ -102,6 +101,7 @@ export class WcloudComponent implements OnInit {
   }
 
   filterEntities(filterArr: Array<string>, arrToBeFiltered: Object[]): Object[]{
+  
     if(filterArr){
       return arrToBeFiltered.filter((obj) => {
         return filterArr.indexOf(obj.type) >= 0;
