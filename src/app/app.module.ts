@@ -51,7 +51,7 @@ const routes: Routes = [
     HomepageFeaturesComponent,
     LoginFormComponent,
     SignupFormComponent,
-    BookComponent,
+    // BookComponent,
     BooksListComponent,
     SearchComponent,
     FileUploadComponent,
