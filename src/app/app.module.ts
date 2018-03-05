@@ -14,18 +14,18 @@ import { AppComponent } from './app.component';
 
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { BooksComponent } from './pages/books/books.component';
+import { BookPageComponent } from './pages/book-page/book-page.component';
 
 import { HomepageLeftComponent } from './components/homepage-left/homepage-left.component';
 import { HomepageRightComponent } from './components/homepage-right/homepage-right.component';
 import { HomepageFeaturesComponent } from './components/homepage-features/homepage-features.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
-// import { BookComponent } from './components/book/book.component';
+import { BookComponent } from './components/book/book.component';
 import { BooksListComponent } from './components/books-list/books-list.component';
 import { SearchComponent } from './components/search/search.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { BookPageComponent } from './pages/book-page/book-page.component';
 import { WcloudComponent } from './components/wcloud/wcloud.component';
 import { FiltersComponent } from './components/filters/filters.component';
 
@@ -51,7 +51,7 @@ const routes: Routes = [
     HomepageFeaturesComponent,
     LoginFormComponent,
     SignupFormComponent,
-    // BookComponent,
+    BookComponent,
     BooksListComponent,
     SearchComponent,
     FileUploadComponent,
