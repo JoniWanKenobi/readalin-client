@@ -45,7 +45,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HomepageComponent,
-    // BooksComponent,
+    BooksComponent,
     HomepageLeftComponent,
     HomepageRightComponent,
     HomepageFeaturesComponent,
