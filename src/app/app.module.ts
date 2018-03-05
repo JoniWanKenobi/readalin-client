@@ -20,7 +20,7 @@ import { HomepageRightComponent } from './components/homepage-right/homepage-rig
 import { HomepageFeaturesComponent } from './components/homepage-features/homepage-features.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
-import { BookComponent } from './components/book/book.component';
+// import { BookComponent } from './components/book/book.component';
 import { BooksListComponent } from './components/books-list/books-list.component';
 import { SearchComponent } from './components/search/search.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
@@ -45,7 +45,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HomepageComponent,
-    BooksComponent,
+    // BooksComponent,
     HomepageLeftComponent,
     HomepageRightComponent,
     HomepageFeaturesComponent,
