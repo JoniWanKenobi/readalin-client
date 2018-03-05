@@ -46,16 +46,16 @@ export class WcloudComponent implements OnInit {
     this.entities = book.data.entities.slice(0, 200); //get entities from the books service
     this.entities = this.filterEntities(this.filterParameters, this.entities); // filter the entities by category
 
-    const fill = d3.scale.category20(); 
+    // const fill = d3.scale.category20(); 
        
     console.log(this.entities);
     this.width = 700;
     this.height = 500;  
-    const fontScale = d3.scale.linear().range([10, 40]);
-    fontScale.domain([
-      d3.min(this.entities, (d=>d.salience)),
-      d3.min(this.entities, (d=>d.salience)),
-    ])
+    // const fontScale = d3.scale.linear().range([10, 40]);
+    // fontScale.domain([
+    //   d3.min(this.entities, (d=>d.salience)),
+    //   d3.min(this.entities, (d=>d.salience)),
+    // ])
     this.layout = cloud()
         .size([1500, 1500])
         .words(this.entities.map(function(d) {
