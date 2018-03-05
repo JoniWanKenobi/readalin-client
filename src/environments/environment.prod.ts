@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://readalin-server.herokuapp.com'
+  apiUrl: 'https://readalin-server.herokuapp.com'
 };
