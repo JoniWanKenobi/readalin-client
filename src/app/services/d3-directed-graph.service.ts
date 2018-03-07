@@ -1,8 +1,16 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/toPromise';
+
 import * as d3 from "d3";
 
 @Injectable()
 export class D3DirectedGraphService {
+
+  clicked: boolean = false;
+  clickedChange: Subject<any> = new Subject();
+  clickedChange$: Observable<any> = this.clickedChange.asObservable();
 
   nodes: any;
   links: any;
@@ -22,8 +30,20 @@ export class D3DirectedGraphService {
   dragDrop: any;
   zoom: any;
 
+  clickEvent: any;
+
 
   constructor() { }
+  
+
+  toggleClicked() {
+    this.clicked = !this.clicked
+    this.clickedChange.next(this.clicked);
+  }
+
+  setClickEvent(externalFunction){
+    this.clickEvent = externalFunction;
+  }
 
   setNodes(nodes:any){
     //sets nodes
@@ -103,7 +123,7 @@ export class D3DirectedGraphService {
       .data(this.links)
       .enter().append("line")
       .attr("stroke-width", 1)
-      .attr("stroke", "rgba(255, 255, 255)")
+      .attr("stroke", "white")
   }
 
   mountNodes(){
@@ -128,7 +148,7 @@ export class D3DirectedGraphService {
       .attr("font-size", (d)=> this.fontScale(d.salience))
       .attr('text-anchor', 'middle')
       .attr('fill', (node)=> this.getSentimentColor(node.score))
-      .on('click', this.handleClick)      
+      .on('click', this.toggleClicked)      
   }
 
   truncateString(str, length){
@@ -139,9 +159,9 @@ export class D3DirectedGraphService {
     }
   }
 
-  handleClick(d){
-    console.log(d.salience);
-  }
+  // handleClick(d){
+  //   console.log(d.salience);
+  // }
 
   simulationStart(){
     this.simulation.nodes(this.nodes).on('tick', () => {

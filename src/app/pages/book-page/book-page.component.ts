@@ -30,6 +30,8 @@ export class BookPageComponent implements OnInit {
   entitiesNodes: any;
   entitiesLinks: any; 
 
+  wordDetails: boolean = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -67,8 +69,11 @@ export class BookPageComponent implements OnInit {
   }
 
   setLevel(level){
-    this.selectedLevel = level;
+    this.selectedLevel = Number(level);
+    console.log('selected level: ', this.selectedLevel);
     this.setEntities();
+    this.showWordCloud = false;
+    window.setTimeout(() => this.showWordCloud=true);
   }
 
   setCategory(type){
@@ -86,15 +91,12 @@ export class BookPageComponent implements OnInit {
     }
   }
 
-
-
   setEntities(){
-    this.slicedEntities = this.entities.slice((1 - this.selectedLevel) * this.interval, this.selectedLevel * this.interval);
-    this.types = this.getTypes(this.slicedEntities);
-    this.filteredEntities = this.filterEntities(this.selectedType, this.slicedEntities);    
+    const slicedEntities = this.entities.slice((this.selectedLevel -1) * this.interval, this.selectedLevel * this.interval);
+    this.types = this.getTypes(slicedEntities);
+    this.filteredEntities = this.filterEntities(this.selectedType, slicedEntities);    
     this.entitiesNodes = this.makeNodes(this.filteredEntities);    
-    this.entitiesLinks = this.makeLinks(this.filteredEntities);
-    
+    this.entitiesLinks = this.makeLinks(this.filteredEntities);    
   }
 
   makeNodes(entitiesArr){
@@ -126,6 +128,16 @@ export class BookPageComponent implements OnInit {
     } else {
       return entities;
     }
+  }
+
+  wordClickEvent(node: any){
+    // this.showWordCloud = false;
+    this.wordDetails = true;
+    window.setTimeout(() => this.wordDetails=false);
+    console.log(node.salience)
+    console.log(this.wordDetails);
+    alert('whaaat')
+    // console.log(this.showWordCloud);
   }
 
 }

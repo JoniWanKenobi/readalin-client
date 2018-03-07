@@ -3,6 +3,7 @@
 
 <!-- header -->
 <div *ngIf = "loading">Loading your new reading experience...</div>
+<div *ngIf="wordDetails">WHAAAAAAAATTTTTT</div>
 <div *ngIf = "!loading">
   <div class="panel">
     <div class="panel-heading">
@@ -12,19 +13,50 @@
       <p *ngIf = "book">
         {{book.originalName}}
       </p>
-    </div>    
-    <div class="panel-block justify-center">
-      <div class="tags" >
-        <span [class]="tagClass" *ngFor = "let level of levels" (click) = "setLevel(level)" > {{level}}</span>  
-      </div>
     </div>
+    <div *ngIf="!wordDetails">
     <div class="panel-block justify-center">
       <div class="tags" >
-        <span [class]="tagClass" *ngFor = "let type of types" (click) = "setCategory(type)" > {{type}}</span>  
+            <span [class]="tagClass" *ngFor = "let level of levels" (click) = "setLevel(level)" > {{level}}</span>  
+          </div>
+        </div>
+        <div class="panel-block justify-center">
+          <div class="tags" >
+            <span [class]="tagClass" *ngFor = "let type of types" (click) = "setCategory(type)" > {{type}}</span>  
+          </div>
+        </div>    
+        <div *ngIf="showWordCloud">
+          <app-force-directed-wordcloud 
+          [nodes] = "entitiesNodes" 
+          [links] = "entitiesLinks" 
+          [category] = "selectedType"
+          [clickEvent] = "wordClickEvent"></app-force-directed-wordcloud>
+        </div>
+      </div>      
+      <div *ngIf="wordDetails">
+
+          <div class="modal">
+              <div class="modal-background"></div>
+              <div class="modal-card">
+                <header class="modal-card-head">
+                  <p class="modal-card-title">Modal title</p>
+                  <button class="delete" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                  <!-- Content ... -->
+                </section>
+                <footer class="modal-card-foot">
+                  <button class="button is-success">Save changes</button>
+                  <button class="button">Cancel</button>
+                </footer>
+              </div>
+            </div>
+
+
+
+
+          <!-- <app-word-details-graph></app-word-details-graph> -->
       </div>
-    </div>    
-  </div>
-  <div *ngIf="showWordCloud">
-    <app-force-directed-wordcloud [nodes] = "entitiesNodes" [links] = "entitiesLinks" [category] = "selectedType"></app-force-directed-wordcloud>
-  </div>
+  </div> 
 </div>
+    

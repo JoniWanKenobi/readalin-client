@@ -12,6 +12,7 @@ export class ForceDirectedWordcloudComponent implements OnInit{
   @Input() nodes: any;
   @Input() links: any;
   @Input() category: string;
+  @Input() clickEvent: any;
 
   width: any = window.innerWidth;
   height: any = window.innerHeight;
@@ -19,13 +20,26 @@ export class ForceDirectedWordcloudComponent implements OnInit{
   graphDisplaying: boolean = false;
   changeLog: any = [];
 
-  constructor(private fdGraph: D3DirectedGraphService) { }
+  clicked: boolean;
+  // _clickedSubscription: any;
+
+
+  constructor(private fdGraph: D3DirectedGraphService) { 
+    
+   }
 
   ngOnInit() {
+
+    this.fdGraph.clickedChange$.subscribe((clicked) => {      
+      this.clicked = clicked;      
+    });
+
+
     this.draw();
   }  
 
   draw(){
+    // this.fdGraph.setClickEvent(this.clickEvent);
     this.fdGraph.setNodes(this.nodes);  
     this.fdGraph.setLinks(this.links);  
     this.fdGraph.svgInit();  
