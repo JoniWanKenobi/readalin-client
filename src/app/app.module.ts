@@ -8,6 +8,7 @@ import { AuthService } from './services/auth.service';
 import { RequireAnonGuardService } from './services/require-anon-guard.service';
 import { RequireUserGuardService } from './services/require-user-guard.service';
 import { BooksService } from './services/books.service';
+import { D3DirectedGraphService } from './services/d3-directed-graph.service';
 
 
 import { AppComponent } from './app.component';
@@ -28,6 +29,8 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { WcloudComponent } from './components/wcloud/wcloud.component';
 import { FiltersComponent } from './components/filters/filters.component';
+import { DirectedGraphComponent } from './services/directed-graph/directed-graph.component';
+import { ForceDirectedWordcloudComponent } from './components/force-directed-wordcloud/force-directed-wordcloud.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -58,7 +61,9 @@ const routes: Routes = [
     NavbarComponent,
     BookPageComponent,
     WcloudComponent,
-    FiltersComponent
+    FiltersComponent,
+    DirectedGraphComponent,
+    ForceDirectedWordcloudComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +71,13 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [AuthService, RequireAnonGuardService, RequireUserGuardService, BooksService],
+  providers: [
+    AuthService, 
+    RequireAnonGuardService, 
+    RequireUserGuardService, 
+    BooksService,
+    D3DirectedGraphService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

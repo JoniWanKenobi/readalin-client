@@ -2,5 +2,6 @@
 <div class="panel-block">
   <!-- <div *ngFor = "let entity of entities">{{entity.name}}</div> -->
   <!-- <div *ngIf = "loading">Loading...</div> -->
-  <div id = "wordcloud"></div>  
+  <!-- <div id = "wordcloud"></div>   -->
+  <app-force-directed-wordcloud [nodes]="entitiesNodes" [links]="entitiesLinks"></app-force-directed-wordcloud>
 </div>
