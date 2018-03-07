@@ -27,7 +27,6 @@ import { BooksListComponent } from './components/books-list/books-list.component
 import { SearchComponent } from './components/search/search.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { WcloudComponent } from './components/wcloud/wcloud.component';
 import { FiltersComponent } from './components/filters/filters.component';
 import { DirectedGraphComponent } from './services/directed-graph/directed-graph.component';
 import { ForceDirectedWordcloudComponent } from './components/force-directed-wordcloud/force-directed-wordcloud.component';
@@ -36,12 +35,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home',  component: HomepageComponent, canActivate: [ RequireAnonGuardService ] },
   { path: 'books/:id', component: BooksComponent, canActivate: [RequireUserGuardService] },
-  { path: 'book/:id', component: BookPageComponent, canActivate: [RequireUserGuardService],
-    children: [
-      { path: '', redirectTo: 'flyover', pathMatch: 'full' },
-      { path: 'flyover', component: WcloudComponent }
-    ]
-}
+  { path: 'book/:id', component: BookPageComponent, canActivate: [RequireUserGuardService]}
 ];
 
 @NgModule({
@@ -60,7 +54,6 @@ const routes: Routes = [
     FileUploadComponent,
     NavbarComponent,
     BookPageComponent,
-    WcloudComponent,
     FiltersComponent,
     DirectedGraphComponent,
     ForceDirectedWordcloudComponent

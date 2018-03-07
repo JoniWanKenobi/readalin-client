@@ -12,20 +12,19 @@
       <p *ngIf = "book">
         {{book.originalName}}
       </p>
-    </div>
-    <p class="panel-tabs">
-      <a class="is-active"><i class="fab fa-fly fa-2x"></i>Fly over</a>
-      <a>Dive in</a>
-    </p>
+    </div>    
     <div class="panel-block justify-center">
       <div class="tags" >
-        <span [class]="tagClass" *ngFor = "let type of types" (click) = "filterWordCloud(type)" > {{type}}</span>  
+        <span [class]="tagClass" *ngFor = "let level of levels" (click) = "setLevel(level)" > {{level}}</span>  
       </div>
     </div>
-    <!-- <div class="panel-block"> -->
-      <!-- types -->
-    <!-- </div>   -->
-    <router-outlet></router-outlet>
+    <div class="panel-block justify-center">
+      <div class="tags" >
+        <span [class]="tagClass" *ngFor = "let type of types" (click) = "setCategory(type)" > {{type}}</span>  
+      </div>
+    </div>    
   </div>
-  <!-- <app-wcloud [entities] = "filteredEntities.slice(0, 200)"></app-wcloud>      -->
+  <div *ngIf="showWordCloud">
+    <app-force-directed-wordcloud [nodes] = "entitiesNodes" [links] = "entitiesLinks" [category] = "selectedType"></app-force-directed-wordcloud>
+  </div>
 </div>

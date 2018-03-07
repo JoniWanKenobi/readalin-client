@@ -65,7 +65,7 @@ export class D3DirectedGraphService {
 
   svgInit(){
     //initializes svg element
-    this.svg = d3.select('#container').append('svg');
+    this.svg = d3.select('#container').append('svg').attr('id', 'graph');
       
   }
 
