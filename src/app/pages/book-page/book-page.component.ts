@@ -34,6 +34,7 @@ export class BookPageComponent implements OnInit {
   selectedNode: any;
   wordsNodes: any;
   wordsLinks: any;
+  wordDetailsInfo: any;
 
   constructor(
     private router: Router,
@@ -126,7 +127,7 @@ export class BookPageComponent implements OnInit {
 
   reduceMentions(entity){
     return entity.mentions.reduce((acc, val) => {
-      if(acc.indexOf(val.text.content) > -1){
+      if(acc.indexOf(val.text.content) === -1){
         acc.push(val.text.content);
       }
       return acc;
@@ -163,11 +164,22 @@ export class BookPageComponent implements OnInit {
 
   entityClickEvent(node: any){
     this.selectedNode = node;
-    this.wordsNodes = this.mapWordsNodes(node);
-    this.wordsLinks = this.mapWordsLinks(this.wordsNodes);
-    this.showWordCloud = false;
+    this.wordDetailsInfo = node.mentions.map((mention, index)=>{
+      return {id: index, name: mention, sentences: this.getSentences(mention)}
+    });
+    console.log('info: ', this.wordDetailsInfo);
+    
+    // this.wordsNodes = this.mapWordsNodes(node);
+    // this.wordsLinks = this.mapWordsLinks(this.wordsNodes);
+    // this.showWordCloud = false;
     this.wordDetails = true;    
   }
+
+  hideDetails(){
+    this.wordDetails = false;
+  }
+
+
 
   mapWordsNodes(node: any){
     const sentences = this.getAllSentences(node.mentions);
@@ -192,10 +204,10 @@ export class BookPageComponent implements OnInit {
   }
 
   sentencesClickEvent(node: any){
-    // this.selectedNode = node;
+    this.selectedNode = node;
     // this.wordsNodes = this.mapWordsNodes(node);
     // this.wordsLinks = this.mapWordsLinks(this.wordsNodes);
-    this.showWordCloud = true;
+    // this.showWordCloud = true;
     this.wordDetails = false;    
   }
 }

@@ -1,4 +1,19 @@
-<p>
-  word-details-graph works!
-</p>
-<p>{{node.name}}</p>
+<section class="section">
+  <h2 class="title"><span (click) = "back()"><i class="fas fa-chevron-circle-left" ></i></span>
+    {{node.name}}
+  </h2>  
+  
+  <div *ngFor="let item of info" class="card" >
+      <header class="card-header" (click) = "toggleShowSentences(item)">
+        <p class="card-header-title">
+          {{item.name}}
+        </p>        
+      </header>
+      <div class="card-content" *ngIf = "showSentences && selectedWord.id === item.id">
+        <div class="content" *ngFor="let sentence of item.sentences">
+          {{sentence}}
+        </div>
+      </div>      
+    </div>
+</section>
+

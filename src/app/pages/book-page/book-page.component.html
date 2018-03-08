@@ -5,6 +5,8 @@
 <div *ngIf = "loading">Loading your new reading experience...</div>
 
 <div *ngIf = "!loading">
+  
+  
   <div class="panel">
     <div class="panel-heading">
       <a (click) = "goToBooks()">
@@ -14,43 +16,50 @@
         {{book.originalName}}
       </p>
     </div>
-
+    
     <!-- levels and filters -->
-    <div *ngIf="!wordDetails">
-    <div class="panel-block justify-center">
-      <div class="tags" >
-            <span [class]="tagClass" *ngFor = "let level of levels" (click) = "setLevel(level)" > {{level}}</span>  
-          </div>
-        </div>
-        <div class="panel-block justify-center">
-          <div class="tags" >
-            <span [class]="tagClass" *ngFor = "let type of types" (click) = "setCategory(type)" > {{type}}</span>  
-          </div>
-        </div>    
-
-        <!-- graph -->
-        <div *ngIf="showWordCloud">
-          <app-force-directed-wordcloud 
-          [nodes] = "entitiesNodes" 
-          [links] = "entitiesLinks" 
-          [category] = "selectedType"
-          [clickEvent] = "entityClickEvent.bind(this)"></app-force-directed-wordcloud>
-        </div>
-      </div>      
-
+    <div class="columns">
+      <div *ngIf="!wordDetails">
+        <div class="column">
+          <div class="filters-and-graph">
+            <div class="panel-block justify-center">
+              <div class="tags" >
+                <span [class]="tagClass" *ngFor = "let level of levels" (click) = "setLevel(level)" > {{level}}</span>  
+              </div>
+            </div>
+            <div class="panel-block justify-center">
+              <div class="tags" >
+                <span [class]="tagClass" *ngFor = "let type of types" (click) = "setCategory(type)" > {{type}}</span>  
+              </div>
+            </div>                
+              <!-- graph -->
+            <div *ngIf="showWordCloud">
+              <app-force-directed-wordcloud 
+              [nodes] = "entitiesNodes" 
+              [links] = "entitiesLinks" 
+              [category] = "selectedType"
+              [clickEvent] = "entityClickEvent.bind(this)"></app-force-directed-wordcloud>
+            </div>
+          </div> <!--end of filter and graph-->     
+        </div> <!--end of filter and graph column-->
+      </div>  <!--end of ngIf !wordDetails-->
+        <div class="column" *ngIf="wordDetails">
+          <app-word-details-graph [node]="selectedNode" [info] = "wordDetailsInfo" (hideDetails)="hideDetails()"></app-word-details-graph>
+        </div> <!--end of side-bar column-->
+    </div> <!--end of columns-->
+  </div> <!--end of panel  ?-->      
+</div> <!--end of if loading-->  
+      
       <!-- graph details -->
-      <div *ngIf="wordDetails">
-
-          <app-force-directed-wordcloud 
-          [nodes] = "wordsNodes" 
-          [links] = "wordsLinks" 
-          [clickEvent] = "sentencesClickEvent.bind(this)"></app-force-directed-wordcloud>
-          <!-- <app-word-details-graph [node] = "selectedNode"></app-word-details-graph> -->
-
-           
-      </div>
-      
-      
-  </div> 
-</div>
+      <!-- <div *ngIf="wordDetails">
+        
+        <app-force-directed-wordcloud 
+        [nodes] = "wordsNodes" 
+        [links] = "wordsLinks" 
+        [clickEvent] = "sentencesClickEvent.bind(this)"></app-force-directed-wordcloud> -->
+        
+        
+        <!-- </div> -->     
+        
+        
     

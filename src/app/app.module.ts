@@ -30,6 +30,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FiltersComponent } from './components/filters/filters.component';
 import { ForceDirectedWordcloudComponent } from './components/force-directed-wordcloud/force-directed-wordcloud.component';
 import { WordDetailsGraphComponent } from './components/word-details-graph/word-details-graph.component';
+import { SentencesListComponent } from './components/sentences-list/sentences-list.component';
+import { WordsListComponent } from './components/words-list/words-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -56,7 +58,9 @@ const routes: Routes = [
     BookPageComponent,
     FiltersComponent,
     ForceDirectedWordcloudComponent,
-    WordDetailsGraphComponent
+    WordDetailsGraphComponent,
+    SentencesListComponent,
+    WordsListComponent
   ],
   imports: [
     BrowserModule,
