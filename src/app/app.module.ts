@@ -28,7 +28,6 @@ import { SearchComponent } from './components/search/search.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FiltersComponent } from './components/filters/filters.component';
-import { DirectedGraphComponent } from './services/directed-graph/directed-graph.component';
 import { ForceDirectedWordcloudComponent } from './components/force-directed-wordcloud/force-directed-wordcloud.component';
 import { WordDetailsGraphComponent } from './components/word-details-graph/word-details-graph.component';
 
@@ -56,7 +55,6 @@ const routes: Routes = [
     NavbarComponent,
     BookPageComponent,
     FiltersComponent,
-    DirectedGraphComponent,
     ForceDirectedWordcloudComponent,
     WordDetailsGraphComponent
   ],
