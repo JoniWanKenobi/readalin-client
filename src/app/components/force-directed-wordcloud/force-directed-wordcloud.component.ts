@@ -20,7 +20,7 @@ export class ForceDirectedWordcloudComponent implements OnInit{
   graphDisplaying: boolean = false;
   changeLog: any = [];
 
-  clicked: boolean;
+  clicked: boolean = false;
   // _clickedSubscription: any;
 
 
@@ -39,7 +39,7 @@ export class ForceDirectedWordcloudComponent implements OnInit{
   }  
 
   draw(){
-    // this.fdGraph.setClickEvent(this.clickEvent);
+    this.fdGraph.setClickEvent(this.clickEvent);
     this.fdGraph.setNodes(this.nodes);  
     this.fdGraph.setLinks(this.links);  
     this.fdGraph.svgInit();  

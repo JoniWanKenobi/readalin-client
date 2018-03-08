@@ -36,7 +36,8 @@ export class D3DirectedGraphService {
   constructor() { }
   
 
-  toggleClicked() {
+  toggleClicked(d) {
+    console.log('from the service...:', this.clicked)
     this.clicked = !this.clicked
     this.clickedChange.next(this.clicked);
   }
@@ -58,25 +59,25 @@ export class D3DirectedGraphService {
   fontScale(size: any){
     const scale: any = d3.scaleLinear().range([20, 80]);
     scale.domain([
-      d3.min(this.nodes, (d: any) => d.salience),
-      d3.max(this.nodes, (d: any) => d.salience)
+      d3.min(this.nodes, (d: any) => d.size),
+      d3.max(this.nodes, (d: any) => d.size)
     ]);
 
     return scale(size);
   }
 
-  colorScale(score: any){
+  colorScale(color: any){
     const scale: any = d3.scaleLinear<string>().range(['red', 'grey', 'green']);
     scale.domain([-1, 0, 1]);
 
-    return scale(score);
+    return scale(color);
     
   }
 
-  getSentimentColor(score: any){
-    if(score >= 0.1){
+  getSentimentColor(color: any){
+    if(color >= 0.1){
       return 'green';
-    } else if(score <= -0.1){
+    } else if(color <= -0.1){
       return 'red';
     } else {
       return 'blue';
@@ -113,7 +114,7 @@ export class D3DirectedGraphService {
       .force('link', this.linkForce)
       .force('charge', d3.forceManyBody().strength(-10))
       .force('center', d3.forceCenter(this.width / 2, this.height / 2))
-      .force('collision', d3.forceCollide().radius((d:any) =>  this.fontScale(d.salience) * 2))
+      .force('collision', d3.forceCollide().radius((d:any) =>  this.fontScale(d.size) * 2))
   }
 
   mountLinks(){
@@ -133,7 +134,7 @@ export class D3DirectedGraphService {
       .selectAll("circle")
       .data(this.nodes)
       .enter().append("circle")
-      .attr("r", (d)=> this.fontScale(d.salience))
+      .attr("r", (d)=> this.fontScale(d.size))
       .attr("fill", 'white')
   }
 
@@ -145,10 +146,10 @@ export class D3DirectedGraphService {
       .enter().append("text")
       .text((node) =>  this.truncateString(node.name, 20))
       .attr('font-family', 'Roboto')
-      .attr("font-size", (d)=> this.fontScale(d.salience))
+      .attr("font-size", (d)=> this.fontScale(d.size))
       .attr('text-anchor', 'middle')
-      .attr('fill', (node)=> this.getSentimentColor(node.score))
-      .on('click', this.toggleClicked)      
+      .attr('fill', (node)=> this.getSentimentColor(node.color))
+      .on('click', this.clickEvent)      
   }
 
   truncateString(str, length){
@@ -160,7 +161,7 @@ export class D3DirectedGraphService {
   }
 
   // handleClick(d){
-  //   console.log(d.salience);
+  //   console.log(d.size);
   // }
 
   simulationStart(){

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-word-details-graph',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./word-details-graph.component.css']
 })
 export class WordDetailsGraphComponent implements OnInit {
+  @Input() node: any;
 
   constructor() { }
 

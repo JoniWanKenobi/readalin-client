@@ -31,6 +31,9 @@ export class BookPageComponent implements OnInit {
   entitiesLinks: any; 
 
   wordDetails: boolean = false;
+  selectedNode: any;
+  wordsNodes: any;
+  wordsLinks: any;
 
   constructor(
     private router: Router,
@@ -105,10 +108,38 @@ export class BookPageComponent implements OnInit {
         id: index, 
         name: entity.name, 
         level: 1, 
-        score: entity.sentiment.score, 
-        salience: entity.salience * 90
+        color: entity.sentiment.score, 
+        size: entity.salience * 90,
+        metadata: entity.metadata,
+        mentions: this.reduceMentions(entity)
       }
     });
+  }
+
+  getAllSentences(reducedMentions){
+    const res = [];
+    reducedMentions.forEach((mention) => {
+      res.push(this.getSentences(mention));
+    })
+    return res;
+  }
+
+  reduceMentions(entity){
+    return entity.mentions.reduce((acc, val) => {
+      if(acc.indexOf(val.text.content) > -1){
+        acc.push(val.text.content);
+      }
+      return acc;
+    }, [entity.name]);
+  }
+
+  getSentences(mention){
+    return this.book.data.sentences.reduce((acc, val) => {
+      if(val.text.content.includes(mention)){
+        acc.push(val.text.content)
+      }
+      return acc;
+    }, []);    
   }
 
   makeLinks(entitiesArr){    
@@ -130,14 +161,41 @@ export class BookPageComponent implements OnInit {
     }
   }
 
-  wordClickEvent(node: any){
-    // this.showWordCloud = false;
-    this.wordDetails = true;
-    window.setTimeout(() => this.wordDetails=false);
-    console.log(node.salience)
-    console.log(this.wordDetails);
-    alert('whaaat')
-    // console.log(this.showWordCloud);
+  entityClickEvent(node: any){
+    this.selectedNode = node;
+    this.wordsNodes = this.mapWordsNodes(node);
+    this.wordsLinks = this.mapWordsLinks(this.wordsNodes);
+    this.showWordCloud = false;
+    this.wordDetails = true;    
   }
 
+  mapWordsNodes(node: any){
+    const sentences = this.getAllSentences(node.mentions);
+    return sentences.map((sentence: any, index: number) => {
+      return { 
+        id: index, 
+        name: sentence, 
+        level: 1, 
+        color: node.color, 
+        size: 30
+      }
+    });    
+  }
+
+  mapWordsLinks(nodes){    
+    return nodes.map((sentence: any, index: number) => {
+      return { 
+        target: 0, 
+        source: index , 
+        strength: 0.05 }
+    });
+  }
+
+  sentencesClickEvent(node: any){
+    // this.selectedNode = node;
+    // this.wordsNodes = this.mapWordsNodes(node);
+    // this.wordsLinks = this.mapWordsLinks(this.wordsNodes);
+    this.showWordCloud = true;
+    this.wordDetails = false;    
+  }
 }
